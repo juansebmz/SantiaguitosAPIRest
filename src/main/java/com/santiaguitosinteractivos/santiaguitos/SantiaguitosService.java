@@ -3,8 +3,6 @@ package com.santiaguitosinteractivos.santiaguitos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SantiaguitosService {
@@ -12,11 +10,23 @@ public class SantiaguitosService {
     @Autowired
     private SantiaguitosRepository santiaguitosRepository;
 
-    public List<Santiaguitos> getAllSantiaguitos(){
-        return santiaguitosRepository.findAll();
+
+
+    public void saveorUpdate(Santiaguitos santiaguitos) {
+
+        santiaguitosRepository.save(santiaguitos);
     }
 
-    public Optional<Santiaguitos> oneSantiaguito(int identificacion){
-        return santiaguitosRepository.findSantiaguitosByidentificacion(identificacion);
+    public Iterable<Santiaguitos> listAll() {
+
+        return this.santiaguitosRepository.findAll();
+    }
+
+    public void deleteSantiaguito(String id) {
+        santiaguitosRepository.deleteById(id);
+    }
+
+    public Santiaguitos getSantiaguitoById(String santiaguitoid) {
+        return santiaguitosRepository.findById(santiaguitoid).get();
     }
 }
